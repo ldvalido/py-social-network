@@ -1,0 +1,4 @@
+pydantic
+queues logic
+tests
+jinja, black, bla bla
