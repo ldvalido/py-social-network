@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+  social-network-consumer:
+      build: ./social-network-consumer/
+      networks:
+      - social-network-network
+  social-network-api:
+      build: ./social-network-api/
+      networks:
+      - social-network-network
+  rabbitmq:
+      image: rabbitmq:3.11.8-management-alpine
+      ports: 
+      - 15672:15672
+      - 5672:5672
+      networks:
+      - social-network-network
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    networks:
+      - social-network-network
+    volumes:
+      - mongodb:/data/db:rw
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    networks:
+      - social-network-network
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+volumes:
+  mongodb:
+networks:
+  social-network-network:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.10.0.0/16
+         gateway: 10.10.0.1
