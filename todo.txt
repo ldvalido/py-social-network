@@ -1,5 +1,14 @@
-pydantic
 queues logic - fan out / fan in
+** OTel for rabbitmq
+** Requeu policy
+** Basic Qos
+
+Docker compose - shared dev volume and run consumer and API
+** environtmnet variables for host
+** use dns on docker-compose no fixed ip
 tests
 jinja, black, bla bla
+
+*** Study ***
+pydantic
 Merges github

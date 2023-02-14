@@ -6,6 +6,8 @@ services:
       - social-network-network
   social-network-api:
       build: ./social-network-api/
+      ports:
+      - 8000:8000
       networks:
       - social-network-network
   rabbitmq:
